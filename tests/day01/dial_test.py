@@ -54,7 +54,7 @@ class DialTest(TestCase):
         self.assertEqual(dial.position, 50)
         self.assertEqual(dial.passed_zero, 10)
 
-    def test_edge_case(self):
+    def test_zero_to_zero(self):
         dial = Dial()
         dial.turn("R50")
         self.assertEqual(dial.position, 0)
@@ -79,3 +79,19 @@ class DialTest(TestCase):
         self.assertEqual(dial.position, 50)
         self.assertEqual(dial.hit_zero, 1)
         self.assertEqual(dial.passed_zero, 1)
+
+    def test_edge_cases(self):
+        cases = [
+            ("R100", 0, 1),
+            ("L100", 0, 1),
+            ("L100", 1, 1),
+            ("R100", 1, 1),
+            ("L101", 1, 2),
+        ]
+        for instruction, initial, expected in cases:
+            with self.subTest(instruction=instruction, initial=initial,
+                              expected=expected):
+                dial = Dial()
+                dial.position = initial
+                dial.turn(instruction)
+                self.assertEqual(dial.passed_zero, expected)
