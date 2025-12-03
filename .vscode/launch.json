@@ -5,15 +5,39 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "day 01 part 1",
+            "name": "Run day",
             "type": "debugpy",
             "request": "launch",
-            "module": "aoc25.day01",
+            "module": "aoc25",
             "args": [
+                "--day",
+                "${input:day}",
                 "--part",
-                "2",
-                "inputs/day01.txt"
+                "${input:part}",
+                "inputs/day${input:day}.txt"
             ]
+        }
+    ],
+    "inputs": [
+        {
+            "type": "pickString",
+            "id": "day",
+            "description": "Select day to run",
+            "options": [
+                "01",
+                "02"
+            ],
+            "default": "01"
+        },
+        {
+            "type": "pickString",
+            "id": "part",
+            "description": "Select part to run",
+            "options": [
+                "1",
+                "2"
+            ],
+            "default": "1"
         }
     ]
 }

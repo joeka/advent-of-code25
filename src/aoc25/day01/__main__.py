@@ -1,5 +1,6 @@
-from argparse import ArgumentParser
 from pathlib import Path
+
+from ..arguments import parse_args
 
 from .dial import Dial
 
@@ -16,8 +17,5 @@ def main(input_file: Path, part: int = 1) -> None:
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser()
-    parser.add_argument("input_file", type=Path)
-    parser.add_argument("--part", type=int, default=1, choices=[1, 2])
-    args = parser.parse_args()
+    args = parse_args(day=1)
     main(args.input_file, args.part)

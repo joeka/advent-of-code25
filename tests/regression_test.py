@@ -4,7 +4,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 import json
 
-from aoc25.day01.__main__ import main
+from aoc25.__main__ import main
 
 
 class RegressionTests(TestCase):
@@ -16,13 +16,13 @@ class RegressionTests(TestCase):
     def test_day01_part1(self):
         input_path = Path(__file__).parent.parent / "inputs" / "day01.txt"
         with redirect_stdout(StringIO()) as buffer:
-            main(input_path)
+            main(input_path, day=1, part=1)
 
         self.assertEqual(buffer.getvalue(), f"{self.answers["day01part1"]}\n")
 
     def test_day01_part2(self):
         input_path = Path(__file__).parent.parent / "inputs" / "day01.txt"
         with redirect_stdout(StringIO()) as buffer:
-            main(input_path, part=2)
+            main(input_path, day=1, part=2)
 
         self.assertEqual(buffer.getvalue(), f"{self.answers["day01part2"]}\n")
