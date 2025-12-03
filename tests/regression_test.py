@@ -26,3 +26,10 @@ class RegressionTests(TestCase):
             main(input_path, day=1, part=2)
 
         self.assertEqual(buffer.getvalue(), f"{self.answers["day01part2"]}\n")
+
+    def test_day02_part1(self):
+        input_path = Path(__file__).parent.parent / "inputs" / "day02.txt"
+        with redirect_stdout(StringIO()) as buffer:
+            main(input_path, day=2, part=1)
+
+        self.assertEqual(buffer.getvalue(), f"{self.answers["day02part1"]}\n")
