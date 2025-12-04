@@ -25,7 +25,8 @@
             "description": "Select day to run",
             "options": [
                 "01",
-                "02"
+                "02",
+                "03",
             ],
             "default": "01"
         },

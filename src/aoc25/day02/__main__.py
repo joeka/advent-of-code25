@@ -17,5 +17,5 @@ def main(input_file: Path, part: int = 1):
 
 
 if __name__ == "__main__":
-    args = parse_args(day=1)
+    args = parse_args(day=2)
     main(args.input_file, args.part)
