@@ -1,4 +1,17 @@
 from math import log, floor
+import re
+
+
+INVALID_PATTERN = re.compile("^(.+)\\1+$")
+
+
+def validate_range2(start: int, end: int) -> int:
+    invalid_sum = 0
+    for id in range(start, end + 1):
+        if INVALID_PATTERN.match(str(id)):
+            invalid_sum += id
+
+    return invalid_sum
 
 
 def validate_range(start: int, end: int) -> int:
@@ -12,14 +25,14 @@ def validate_range(start: int, end: int) -> int:
         low = int(start % factor)
         half = high if high >= low else high + 1
 
-    sum = 0
+    invalid_sum = 0
 
     digit_count = int(digit_count / 2)
     while True:
         total = mirror(half, digit_count)
         if total > end:
-            return sum
-        sum += total
+            return invalid_sum
+        invalid_sum += total
         half += 1
         digit_count = digits(half)
 
