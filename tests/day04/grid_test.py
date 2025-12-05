@@ -1,5 +1,5 @@
 from unittest import TestCase
-from aoc25.day04.grid import Grid
+from aoc25.day04.grid import Grid, ROLL, EMPTY
 
 
 class GridTest(TestCase):
@@ -8,28 +8,30 @@ class GridTest(TestCase):
         grid = Grid(ascii_grid)
         self.assertEqual(grid.width, 3)
         self.assertEqual(grid.height, 3)
-        self.assertEqual(grid.grid, ascii_grid + "\n")
+        expected_grid = bytearray(b".........")
+        self.assertEqual(grid.grid, expected_grid)
 
     def test_grid_initialization_with_trailing_newline(self):
         ascii_grid = "....\n....\n"
         grid = Grid(ascii_grid)
         self.assertEqual(grid.width, 4)
         self.assertEqual(grid.height, 2)
-        self.assertEqual(grid.grid, ascii_grid)
+        expected_grid = bytearray(b"........")
+        self.assertEqual(grid.grid, expected_grid)
 
     def test_grid_initialization_with_double_trailing_newline(self):
         ascii_grid = "..\n..\n\n"
         grid = Grid(ascii_grid)
         self.assertEqual(grid.width, 2)
         self.assertEqual(grid.height, 2)
-        self.assertEqual(grid.grid, "..\n..\n")
+        self.assertEqual(grid.grid, bytearray(b"...."))
 
     def test_get(self):
         ascii_grid = "..\n.@\n"
         grid = Grid(ascii_grid)
-        self.assertEqual(grid.get(0, 1), ".")
-        self.assertEqual(grid.get(1, 0), ".")
-        self.assertEqual(grid.get(1, 1), "@")
+        self.assertEqual(grid.get(0, 1), EMPTY)
+        self.assertEqual(grid.get(1, 0), EMPTY)
+        self.assertEqual(grid.get(1, 1), ROLL)
 
     def test_surrounding_rolls(self):
         ascii_grid = "...\n.@.\n..."
