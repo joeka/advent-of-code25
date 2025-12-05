@@ -20,15 +20,9 @@
     ],
     "inputs": [
         {
-            "type": "pickString",
+            "type": "promptString",
             "id": "day",
             "description": "Select day to run",
-            "options": [
-                "01",
-                "02",
-                "03",
-                "04"
-            ],
             "default": "01"
         },
         {
