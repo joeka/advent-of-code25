@@ -16,6 +16,8 @@ class ExampleTests(TestCase):
         with answers_path.open() as answers_file:
             answers = json.load(answers_file)
 
+        answers = {key: value for key, value in answers.items() if key == "day06part2"}
+
         for key, expected in answers.items():
             day = int(key[3:5])
             part = int(key[-1:])

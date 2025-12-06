@@ -5,7 +5,9 @@ description = "Advent of Code 2025 solutions in Python"
 readme = "README.md"
 authors = [{ name = "Jonathan Wehrle", email = "jonathan@pengubytes.de" }]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "pandas>=2.3.3",
+]
 
 [build-system]
 requires = ["uv_build>=0.9.14,<0.10.0"]
