@@ -3,7 +3,15 @@ from pathlib import Path
 from ..arguments import parse_args
 
 
-def part2(input_file: Path):
+def add(beams: dict[int, int], pos: int, count: int):
+    if pos not in beams:
+        beams[pos] = count
+    else:
+        beams[pos] += count
+
+
+def main(input_file: Path, part: int = 1):
+    split_count = 0
     timelines = 0
     beams = {}
     with input_file.open() as file:
@@ -11,51 +19,25 @@ def part2(input_file: Path):
             if not beams:
                 beams[line.find("S")] = 1
                 timelines = 1
+                next(file)  # skip 1
                 continue
 
             for beam, count in beams.copy().items():
                 if line[beam] == "^":
-                    left = beam - 1
-                    right = beam + 1
-                    if left not in beams:
-                        beams[left] = count
-                    else:
-                        beams[left] += count
-                    if right not in beams:
-                        beams[right] = count
-                    else:
-                        beams[right] += count
+                    split_count += 1
+
+                    add(beams, beam - 1, count)
+                    add(beams, beam + 1, count)
 
                     timelines += count
                     del beams[beam]
 
-    print(timelines)
+            next(file)  # skip 1
 
-
-def part1(input_file: Path):
-    split_count = 0
-    beams = set()
-    with input_file.open() as file:
-        for line in file:
-            if not beams:
-                beams.add(line.find("S"))
-                continue
-
-            for beam in beams.copy():
-                if line[beam] == "^":
-                    split_count += 1
-                    beams.remove(beam)
-                    beams.add(beam - 1)
-                    beams.add(beam + 1)
-
-    print(split_count)
-
-
-def main(input_file: Path, part: int = 1):
     if part == 1:
-        part1(input_file)
+        print(split_count)
     else:
-        part2(input_file)
+        print(timelines)
 
 
 if __name__ == "__main__":
